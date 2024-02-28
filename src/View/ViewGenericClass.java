@@ -25,10 +25,12 @@ public class ViewGenericClass implements iGetView {
     public static final String STUDENT_DELETED = "StudentDeleted";
     public static final String INVALID_STUDENT_ID = "InvalidStudentId";
     
+    /* @apiNote конструктор */
     public ViewGenericClass(){
         this.lang = "RU";
         langCom = setLangCom("RU");
     }
+    /* @apiNote конструктор */
     public ViewGenericClass(String lang){
         if (lang == "EN") {
             langCom = setLangCom("EN");
@@ -38,7 +40,7 @@ public class ViewGenericClass implements iGetView {
         this.lang = "RU";
         langCom = setLangCom("RU");
     }
-
+/* @apiNote Вывод в терминал общего списка студентов */
     public void printAllStudents(List<Student> students)
     {   String listof = ViewGenericClass.get(LIST_OF_STUDENTS);
         System.out.println(listof);
@@ -49,13 +51,14 @@ public class ViewGenericClass implements iGetView {
         }
         System.out.println("-------------------------------------------------------");
     }
-    
+    /* @apiNote вывод сообщения в терминал  и запрос ответа */
     public String prompt(String msg)
     {
         Scanner in = new Scanner(System.in);
         System.out.println(msg);
         return in.nextLine();
     }
+    /* @apiNote команда смена языка */
     public void changeLang(String lang){
         if (this.lang.equals(lang.toUpperCase())) {
             System.out.println(ViewGenericClass.get(ViewGenericClass.LANGUAGE_NOT_CHANGED));
@@ -74,6 +77,7 @@ public class ViewGenericClass implements iGetView {
                 System.out.println(ViewGenericClass.get(ViewGenericClass.INVALID_LANGUAGE));
         }
     }
+    /* @apiNote Сохранение в map всех команд и сообщений */
     private static Map<String,String> setLangCom(String lang){
         Map<String,String> com = new HashMap<String,String>();
         com.put(LIST_OF_STUDENTS, lang.equals("EN")?"List of students":"Список студентов");
@@ -91,9 +95,8 @@ public class ViewGenericClass implements iGetView {
         com.put(INVALID_LANGUAGE, lang.equals("EN")?"Invalid Language ":"Такой язык не предусмотрен ");
         return com;
     };
+    /* @apiNote по ключу выбираем сообщение */
     public static String get(String sid){
         return ViewGenericClass.langCom.get(sid);
     }
-    
-    
 }
